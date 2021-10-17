@@ -1,0 +1,6 @@
+{
+  "/api/v1/*": "/$1",
+  "/Applications?postulant_id=:id":"/Postulants/:id",
+  "/Notifications?id_company=:id": "/Companies/:id",
+  "/Notifications?id_announcement=:id": "/Announcements/:id"
+}
