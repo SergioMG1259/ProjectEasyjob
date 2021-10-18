@@ -1,4 +1,5 @@
 <template>
+  <!--Esta vista es para que un postulante aplique a un anuncio-->
   <v-container>
     <div class="scroll">
       <div v-for="item in list_notifications" :key="item.id">
