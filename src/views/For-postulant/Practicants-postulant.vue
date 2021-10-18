@@ -1,4 +1,5 @@
 <template>
+  <!--Esto es solo para ver los anuncios que buscan practicantes-->
   <v-container>
     <v-text-field
         v-model="search"
