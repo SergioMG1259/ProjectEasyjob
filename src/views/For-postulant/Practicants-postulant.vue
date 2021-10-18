@@ -61,6 +61,7 @@ export default {
     }
   },
   computed:{
+    //esto es para el buscador
     announcements: function(){
       return this.list_announcements_practicing.filter((item) => {
         return item.required_specialty.toLowerCase().match(this.search.toLowerCase());
