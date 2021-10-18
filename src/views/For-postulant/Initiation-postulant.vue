@@ -39,25 +39,7 @@ export default {
   }),
   methods:{
     get_list_announcement() {
-      /*AnnouncementApiServices.getAll_visible(true).then(response=>{
-        let list_all_announcements=response.data
-        for(let i=0;i<list_all_announcements.length;i++){
-          if(list_all_announcements[i].required_experience!="Practicante"){
-            this.list_announcements.push(list_all_announcements[i])
-            this.list_announcements.sort((a, b) => {
-              let key1 = new Date(a.date);
-              let key2 = new Date(b.date);
-              if (key1 > key2) {
-                return -1;
-              } else if (key1 == key2) {
-                return 0;
-              } else {
-                return 1;
-              }
-            })
-          }
-        }
-      })*/
+
       AnnouncementApiServices.get_all_not_practicing().then(response=>{
         this.list_announcements=response.data
         this.list_announcements.sort((a, b) => {
