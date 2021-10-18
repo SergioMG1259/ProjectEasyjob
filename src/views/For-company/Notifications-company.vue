@@ -1,4 +1,5 @@
 <template>
+  <!--Se permitira visualizar y generar notificaciones a la empresa-->
   <v-container>
     <h1>Mis notificaciones</h1>
     <div class="scroll">
