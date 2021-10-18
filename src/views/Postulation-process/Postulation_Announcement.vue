@@ -1,5 +1,7 @@
 <template>
  <div>
+   <!--Esta vista trata que un postulante aplica a un anuncio, es decir puede
+   postular y cancelar su postulacion-->
    <v-btn @click="back">regresar</v-btn>
    <h1>{{ title }}</h1>
    <h2>{{specialty+" | "+experience}}</h2>
