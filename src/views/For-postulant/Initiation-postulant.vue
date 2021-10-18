@@ -58,17 +58,7 @@ export default {
       router.push(`/postulant/${n}/announcement-postulation/${m}`)
     }
   },
-  computed:{
-    announcements: function(){
-      return this.list_announcements.filter((item) => {
-        return item.required_specialty.toLowerCase().match(this.search.toLowerCase())||item.required_experience.toLowerCase().match(this.search.toLowerCase());
-      })
-    }
-  },
-  mounted() {
-    this.id_postulant_to_postulation=this.$route.params.id
-    this.get_list_announcement()
-  }
+  
 }
 </script>
 
