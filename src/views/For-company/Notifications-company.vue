@@ -14,27 +14,7 @@
   </v-container>
 </template>
 
-<script>
-import NotificationCompanysApiServices from '@/core/services/notifications-company-api.services'
-export default {
-  name: "Notifications-company",
-  data:()=>({
-    list_my_notifications:[],
-    id_company:0
-  }),
-  methods:{
-    get_notifications_company(){
-      NotificationCompanysApiServices.get_notifications_by_company(this.id_company).then(response=>{
-        this.list_my_notifications=response.data
-      })
-    }
-  },
-  mounted() {
-    this.id_company=this.$route.params.id
-    this.get_notifications_company()
-  }
-}
-</script>
+
 
 <style scoped>
 .card-an{
