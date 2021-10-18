@@ -1,4 +1,5 @@
 <template>
+  <!--List of postulants in a annoucement -->
 <div>
   <v-btn @click="back">regresar</v-btn>
   <v-btn @click="Open_dialog_edit">editar</v-btn>
