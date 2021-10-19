@@ -39,6 +39,7 @@ export default {
   }),
   methods:{
     get_list_announcement() {
+
       AnnouncementApiServices.get_all_not_practicing().then(response=>{
         this.list_announcements=response.data
         this.list_announcements.sort((a, b) => {

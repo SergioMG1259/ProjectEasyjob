@@ -1,4 +1,5 @@
 <template>
+  <!--Para escribir y mandar feedback-->
   <v-dialog width="600px" v-model="dialog" persistent>
     <v-card>
       <div class="container-form">

@@ -1,4 +1,5 @@
 <template>
+  <!--Esto es para buscar postulantes-->
   <v-container>
     <v-text-field
         v-model="search"
