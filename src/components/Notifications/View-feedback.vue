@@ -1,5 +1,5 @@
 <template>
-  <!-- Esto es para que el postulante vea el feedback -->
+  <!-- Esto es para que un postulante vea el feedback -->
   <v-dialog width="600px" v-model="dialog" persistent>
     <v-card>
       <v-card-text class="form-edit">
