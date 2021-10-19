@@ -29,11 +29,7 @@ export default {
     id_application:0,
     data_announcement:null,
     title:" ",
-    description:" ",
-    specialty:" ",
-    experience:" ",
-    salary:0,
-    type_money:" ",
+    description:" ",   
     date:" ",
 
     action:"Postular",
@@ -45,15 +41,13 @@ export default {
     back(){
       router.push(`/postulant/${this.id_postulant_applicant}/list-announcements`)
     },
+    <!--obtiene el anuncio a postular-->
     get_announcement_to_postulation() {
       AnnouncementApiServices.get_announcement_by_id(this.id_announcement_applicant).then(response=>{
         this.data_announcement=response.data
         this.title=this.data_announcement.title
         this.description=this.data_announcement.description
-        this.specialty=this.data_announcement.required_specialty
-        this.experience=this.data_announcement.required_experience
-        this.salary=this.data_announcement.salary
-        this.type_money=this.data_announcement.type_money
+    
         this.date=this.data_announcement.date
         this.id_company_notification=this.data_announcement.id_company
       }).catch(e=>{
@@ -137,6 +131,7 @@ export default {
   }
 }
 </script>
+
 
 <style scoped>
 .data-announcement{

@@ -40,7 +40,6 @@ export default {
         this.name_company_notification=data.name_company
         console.log(this.name_company_notification)
       })
-
     },
     get_announcement_name(){
       NotificationsApiServices.get_announcement_notification(this.id_announcement_notification).then(response=>{
@@ -51,7 +50,6 @@ export default {
     delete_application_declined() {
       let id_applications
       ApplicationsApiServices.get_applications_by_id_announcement(this.id_announcement_notification).then(response=>{
-
         let application_by_announcement=response.data
         for(let i=0;i<application_by_announcement.length;i++){
           if(application_by_announcement[i].postulant_id==this.postulant){
@@ -59,9 +57,7 @@ export default {
           }
         }
         ApplicationsApiServices.delete_application(id_applications)
-
       })
-
     },
     send_feedback(){
       console.log("aaa")
@@ -69,7 +65,6 @@ export default {
         let list_notifications=response.data
         if(list_notifications.length>0){
           this.id_notification=list_notifications[list_notifications.length-1].id+1
-
         }
         const data={
           id:this.id_notification,
@@ -98,6 +93,7 @@ export default {
   }
 }
 </script>
+
 
 <style scoped>
 .form-edit{

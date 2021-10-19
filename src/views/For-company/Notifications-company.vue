@@ -16,26 +16,50 @@
 </template>
 
 <script>
-import NotificationCompanysApiServices from '@/core/services/notifications-company-api.services'
+import AnnouncementApiServices from '@/core/services/announcement-api.services'
+import router from "@/router";
 export default {
-  name: "Notifications-company",
+  name: "Initiation-postulant",
   data:()=>({
-    list_my_notifications:[],
-    id_company:0
+    id_postulant_to_postulation:0,
+    list_announcements:[],
+    search:""
   }),
   methods:{
-    get_notifications_company(){
-      NotificationCompanysApiServices.get_notifications_by_company(this.id_company).then(response=>{
-        this.list_my_notifications=response.data
+    get_list_announcement() {
+      AnnouncementApiServices.get_all_not_practicing().then(response=>{
+        this.list_announcements=response.data
+        this.list_announcements.sort((a, b) => {
+          let key1 = new Date(a.date);
+          let key2 = new Date(b.date);
+          if (key1 > key2) {
+            return -1;
+          } else if (key1 == key2) {
+            return 0;
+          } else {
+            return 1;
+          }
+        })
+      })
+    },
+    to_postulation(n,m){
+      router.push(`/postulant/${n}/announcement-postulation/${m}`)
+    }
+  },
+  computed:{
+    announcements: function(){
+      return this.list_announcements.filter((item) => {
+        return item.required_specialty.toLowerCase().match(this.search.toLowerCase())||item.required_experience.toLowerCase().match(this.search.toLowerCase());
       })
     }
   },
   mounted() {
-    this.id_company=this.$route.params.id
-    this.get_notifications_company()
+    this.id_postulant_to_postulation=this.$route.params.id
+    this.get_list_announcement()
   }
 }
 </script>
+
 
 <style scoped>
 .card-an{

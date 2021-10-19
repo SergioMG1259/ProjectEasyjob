@@ -49,7 +49,6 @@ import router from "@/router";
 import Edit_announcement from "@/components/Announcement/edit-announcement/edit_announcement";
 import ApplicationsApiServices from '@/core/services/applications-api.services'
 import Feedback from "@/components/Notifications/Feedback";
-
 export default {
   name: "View-Announcement",
   components: {Feedback, Edit_announcement},
@@ -66,7 +65,6 @@ export default {
     type_money_announcement:" ",
     visible_announcement:false,
     date_announcement:" ",
-
     dialog_edit:false,
     dialog_feedback:false,
   }),
@@ -101,13 +99,11 @@ export default {
       this.dialog_edit=value
     },
     get_postulants(){
-
       ApplicationsApiServices.get_applications_by_id_announcement(this.id_announcement).then(response=>{
         let applications=response.data
         for(let i=0;i<applications.length;i++){
           ApplicationsApiServices.get_postulant_application(applications[i].postulant_id).then(response=>{
             let data=response.data
-
             this.postulants_by_announcement.push(data)
             console.log(this.postulants_by_announcement)
           })
@@ -131,6 +127,7 @@ export default {
   }
 }
 </script>
+
 
 <style scoped>
 .data-announcement{
