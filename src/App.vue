@@ -5,7 +5,7 @@
       <router-link to="/profile-company/1">Empresas</router-link>
       <router-link to="/profile-postulant/1">Postulantes</router-link>
     </div>
-    <router-view/>
+    <router-view />
   </div>
 </template>
 
@@ -16,6 +16,8 @@
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
+  width: 100%;
+  height: 100%;
 }
 
 #nav {

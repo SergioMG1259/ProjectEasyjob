@@ -41,7 +41,7 @@ export default {
     back(){
       router.push(`/postulant/${this.id_postulant_applicant}/list-announcements`)
     },
-    <!--obtiene el anuncio a postular-->
+    //obtiene el anuncio a postular-->
     get_announcement_to_postulation() {
       AnnouncementApiServices.get_announcement_by_id(this.id_announcement_applicant).then(response=>{
         this.data_announcement=response.data
