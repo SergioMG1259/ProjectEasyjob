@@ -40,27 +40,28 @@ export default {
     id_project:0,
     id_postulant:0,
     data_edit:null,
-    title_edit:" ",
-    img_edit:" ",
-    description_edit:" ",
-    //link_github_edit:" ",
+    title_edit:"",
+    img_edit:"",
+    description_edit:"",
+    //link_github_edit:"",
     repositories_edit:[],
-    repository_select: {name:" ",link:" "},
-    username:" "
+    repository_select: {name:"",link:""},
+    username:"",
+    serverPostulant:null,
+    serverProject:null
   }),
   methods:{
     close_dialog(){
       this.$emit('close_edit',false)
     },
     get_project_to_edit(){
-      ProjectApiServices.get_project_by_id(this.id_project).then(response=>{
+      this.serverProject.get_project_by_id(this.id_project).then(response=>{
         this.data_edit=response.data
-
         this.title_edit=this.data_edit.title
-        this.img_edit=this.data_edit.img_project
+        this.img_edit=this.data_edit.imgProject
         this.description_edit=this.data_edit.description
        // this.link_github_edit=this.data_edit.linktogithub
-        this.repository_select.link=this.data_edit.linktogithub
+        this.repository_select.link=this.data_edit.linkToGithub
 
       }).catch(e=>{
         console.log(e);
@@ -83,9 +84,10 @@ export default {
       })
     },
     get_repositories_to_edit(){
-      ProfilePostulantServices.get_profile_postulant_by_id(this.id_postulant).then(response=>{
+      this.serverPostulant.get_profile_postulant_by_id(this.id_postulant).then(response=>{
+
         let aux=response.data
-        this.username=aux.namegithub
+        this.username=aux.nameGithub
         this.get_repositories()
       }).catch(e=>{
         console.log(e);
@@ -95,10 +97,11 @@ export default {
       const data={
         title:this.title_edit,
         description:this.description_edit,
-        linktogithub:this.repository_select.link,
-        img_project:this.img_edit
+        linkToGithub:this.repository_select.link,
+        imgProject:this.img_edit
       }
-      ProjectApiServices.edit_project(this.id_project,data).then(response=>{
+      console.log(data)
+      this.serverProject.edit_project(this.id_project,data).then(response=>{
         console.log(response)
       }).catch(e=>{
         console.log(e);
@@ -107,9 +110,10 @@ export default {
     }
   },
   mounted() {
+    this.serverPostulant=new ProfilePostulantServices(sessionStorage.getItem("token"))
+    this.serverProject=new ProjectApiServices(sessionStorage.getItem("token"))
     this.id_postulant=this.$route.params.id
     this.id_project=this.$route.params.idp
-
     this.get_project_to_edit()
     this.get_repositories_to_edit()
   }
