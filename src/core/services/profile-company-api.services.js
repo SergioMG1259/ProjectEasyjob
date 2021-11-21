@@ -1,14 +1,19 @@
-import http from "./http-common"
-class ProfileCompanyServices{
+//import http from "./http-common"
+//import https from "./http-commonBackend"
+import httpaxios from "./http-commonToken";
+export default class ProfileCompanyServices{
+    https=null
+    constructor(token) {
+        this.https=httpaxios(token)
+    }
     getAll(){
-        return http.get("/Companies");
+        return  this.https.get("/companies");
     }
     get_profile_company_by_id(id){
-        return http.get(`/Companies/${id}`);
+        return  this.https.get(`/companies/${id}`);
     }
     edit_profile_company(id,data){
-        return http.patch(`/Companies/${id}`,data)
+        return  this.https.put(`/companies/${id}`,data)
     }
 
 }
-export default new ProfileCompanyServices();
