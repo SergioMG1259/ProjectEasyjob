@@ -1,28 +1,33 @@
-import http from "./http-common"
-class AnnouncementApiServices {
+//import http from "./http-common"
+//import https from "./http-commonBackend"
+import httpaxios from "./http-commonToken";
+export default class AnnouncementApiServices {
+    https=null
+    constructor(token) {
+        this.https=httpaxios(token)
+    }
     getAll(){
-        return http.get("/Announcements");
+        return this.https.get("/announcements");
     }
     getAll_visible(value){
-        return http.get(`/Announcements?visible=${value}`);
+        return this.https.get(`/announcements?visible=${value}`);
     }
     get_all_not_practicing(){
-        return http.get(`/Announcements?required_experience_ne=Practicante&visible=true`);
+        return this.https.get(`/announcements/NotPracticing`);
     }
     get_all_practicing(){
-        return http.get(`/Announcements?required_experience=Practicante`);
+        return this.https.get(`/announcements/Practicing`);
     }
     get_announcement_by_company(id){
-        return http.get(`/Announcements?id_company=${id}`);
+        return this.https.get(`/companies/${id}/announcements`);
     }
     get_announcement_by_id(id){
-        return http.get(`/Announcements/${id}`);
+        return this.https.get(`/announcements/${id}`);
     }
     edit_announcement(id,data){
-        return http.patch(`/Announcements/${id}`,data)
+        return this.https.put(`/announcements/${id}`,data)
     }
     add_announcement(data){
-        return http.post(`/Announcements`,data)
+        return this.https.post(`/announcements`,data)
     }
 }
-export default new AnnouncementApiServices();

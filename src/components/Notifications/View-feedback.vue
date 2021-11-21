@@ -1,12 +1,22 @@
 <template>
-  <!-- Esto es para que un postulante vea el feedback -->
-  <v-dialog width="600px" v-model="dialog" persistent>
+  <v-dialog width="620px" v-model="dialog" persistent>
     <v-card>
-      <v-card-text class="form-edit">
-        {{feedback_text}}
-      </v-card-text>
+      <v-row>
+        <v-col>
+          <h2>Feedback</h2>
+        </v-col>
+
+      </v-row>
+      <v-row>
+        <v-col>
+          <p>
+            {{feedback_text}}
+          </p>
+        </v-col>
+      </v-row>
+
       <v-card-actions class="form-edit">
-        <v-btn @click="close_this_dialog">Cerrar</v-btn>
+        <v-btn @click="close_this_dialog" color="red" class="btn-feedback">Cerrar</v-btn>
       </v-card-actions>
     </v-card>
   </v-dialog>
@@ -15,21 +25,31 @@
 <script>
 export default {
   name: "View-feedback",
-  props:["dialog","feedback"],
+  props:["dialog"],
   data:()=>({
-    feedback_text:"s"
+    feedback_text:""
   }),
   methods:{
     close_this_dialog(){
       this.$emit('close_feedback',false)
+    },
+    get_feedback(feedback){
+      this.feedback_text=feedback
     }
   },
   mounted() {
-    this.feedback_text=this.feedback
+
+  },
+  created() {
+    //this.id_evidence=this.$route.params.idp
+    //this.get_evidence_to_edit()
+    this.$parent.$on('get_feedback_view',this.get_feedback)
   }
 }
 </script>
 
 <style scoped>
-
+.btn-feedback{
+  color: white;
+}
 </style>
