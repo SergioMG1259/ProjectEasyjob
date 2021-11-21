@@ -47,17 +47,19 @@ export default {
     description_add:" ",
     img_add:" ",
     repository_add:{name:" ",link:" "},
-    repositories:[]
+    repositories:[],
+    serverPostulant:null,
+    serverProject:null
   }),
   methods:{
-    id_project_auto_generate(){
+   /* id_project_auto_generate(){
       ProjectApiServices.getAll().then(response=>{
         let projects=response.data
         this.id_project=projects[projects.length-1].id+1
       }).catch(e=>{
         console.log(e);
       })
-    },
+    },*/
     get_all_repositories(value){
       RepositoriesApiServices.get_repositories_by_username(value).then(response=>{
         let raw_repositories=response.data
@@ -71,10 +73,10 @@ export default {
     },
     get_all_repositories_to_add(){
       let username_github
-      ProfilePostulantServices.get_profile_postulant_by_id(this.id_postulant_add).then(response=>{
+      this.serverPostulant.get_profile_postulant_by_id(this.id_postulant_add).then(response=>{
         let postulant=response.data
 
-       username_github=postulant.namegithub
+       username_github=postulant.nameGithub
         this.get_all_repositories(username_github)
       })
       console.log(username_github)
@@ -85,14 +87,13 @@ export default {
     },
     add_project(){
       const data={
-        id:this.id_project,
         title:this.title_add,
         description:this.description_add,
-        id_postulant:this.id_postulant_add,
-        linktogithub: this.repository_add.link,
-        img_project:this.img_add,
+        postulantId:this.id_postulant_add,
+        linkToGithub: this.repository_add.link,
+        imgProject:this.img_add,
       }
-      ProjectApiServices.add_project(data).then(response=>{
+      this.serverProject.add_project(data).then(response=>{
         console.log(response)
       }).catch(e=>{
         console.log(e);
@@ -101,8 +102,10 @@ export default {
     },
   },
   mounted() {
+    this.serverPostulant=new ProfilePostulantServices(sessionStorage.getItem("token"))
+    this.serverProject=new ProjectApiServices(sessionStorage.getItem("token"))
     this.id_postulant_add=this.$route.params.id
-    this.id_project_auto_generate()
+    //this.id_project_auto_generate()
     this.get_all_repositories_to_add()
   }
 }
