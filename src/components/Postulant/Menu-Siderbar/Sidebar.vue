@@ -67,17 +67,23 @@ export default {
       items: [
 
       ],
+      id:0,
     };
   },
+  methods:{
+    setid(id){
+      this.id=id
+    }
+  },
   created() {
-
+    //this.$parent.$on('set_id',this.setid)
     let items2 = [
-      { title: "Inicio",href:"/postulant/1/list-announcements"},
-      { title: "Perfil",href: "/profile-postulant/1" },
-      { title: "Notificaciones",href: "/postulant/1/my-notifications"},
-      { title: "Mensajes" },
-      { title: "Para Practicantes", href: "/postulant/1/list-announcements-practicing"},
-      { title: "Premium" },
+      { title: "Inicio",href:`/postulant/${sessionStorage.getItem("id")}/list-announcements`},
+      { title: "Perfil",href: `/profile-postulant/${sessionStorage.getItem("id")}` },
+      { title: "Notificaciones",href: `/postulant/${sessionStorage.getItem("id")}/my-notifications`},
+      /*{ title: "Mensajes" },*/
+      { title: "Para Practicantes", href: `/postulant/${sessionStorage.getItem("id")}/list-announcements-practicing`},
+      /*{ title: "Premium" },*/
     ];
     this.items= items2;
     //this.testvar=linkxd
