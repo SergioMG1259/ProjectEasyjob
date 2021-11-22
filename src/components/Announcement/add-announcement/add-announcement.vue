@@ -5,9 +5,9 @@
         <v-text-field
             label="Titulo" class="form-edit" v-model="title_add"
         ></v-text-field>
-        <v-text-field
+        <v-textarea
             label="Descripcion" class="form-edit" v-model="description_add"
-        ></v-text-field>
+        ></v-textarea>
         <v-select
             class="form-edit"
             dense
@@ -46,8 +46,8 @@
           </v-switch>
         </v-card-actions >
         <v-card-actions class="form-edit">
-          <v-btn @click="close_dialog_add_announcement">Cancel</v-btn>
-          <v-btn @click="add_announcement">Add</v-btn>
+          <v-btn @click="close_dialog_add_announcement" color="red" class="btn-announcement">Cancel</v-btn>
+          <v-btn @click="add_announcement" color="purple" class="btn-announcement">Add</v-btn>
         </v-card-actions>
       </div>
     </v-card>
@@ -72,6 +72,7 @@ export default {
     money:['ARS','BRL','CLP','COP','MXN','PEN','USD'],
     type_money_add:" ",
     visible_add:false,
+    serviceAnnouncement:null
   }),
   methods:{
     close_dialog_add_announcement(){
@@ -85,26 +86,25 @@ export default {
       this.$emit('close_dialog',false)
     },
     get_id_to_add(){
-      AnnouncementApiServices.getAll().then(response=>{
+      this.serviceAnnouncement.getAll().then(response=>{
         let all_announcements=response.data
         this.id_announcement=all_announcements[all_announcements.length-1].id+1
       })
     },
     add_announcement(){
-      this.get_id_to_add()
+     // this.get_id_to_add()
       const data={
-        id:this.id_announcement,
         title:this.title_add,
         description:this.description_add,
-        required_specialty:this.select_specialty,
-        required_experience:this.select_experience,
+        requiredSpecialty:this.select_specialty,
+        requiredExperience:this.select_experience,
         salary:this.salary_add,
-        type_money:this.type_money_add,
+        typeMoney:this.type_money_add,
         visible:this.visible_add,
         date:"11/15/2021",
-        id_company:this.id_company_add
+        companyId:this.id_company_add
       }
-      AnnouncementApiServices.add_announcement(data).then(response=>{
+      this.serviceAnnouncement.add_announcement(data).then(response=>{
         console.log(response)
       }).catch(e=>{
         console.log(e);
@@ -113,7 +113,8 @@ export default {
     }
   },
   mounted() {
-   this.id_company_add=this.$route.params.iduser
+    this.serviceAnnouncement=new AnnouncementApiServices(sessionStorage.getItem("token"))
+    this.id_company_add=this.$route.params.iduser
   }
 }
 </script>
@@ -124,6 +125,10 @@ export default {
   align-content: center;
   margin-left: 12%;
   margin-top: 10px;
+}
+.btn-announcement{
+  margin-left: 25px;
+  color: white;
 }
 
 </style>

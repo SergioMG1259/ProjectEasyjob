@@ -72,12 +72,10 @@ export default {
   created() {
 
     let items2 = [
-      { title: "Inicio", href:"/my-announcements/1"},
-      { title: "Perfil",href: "/profile-company/1" },
-      { title: "Notificaciones", href: "/company/1/my-notifications"},
-      { title: "Buscar postulantes",href: "/company/1/search-profile-postulant" },
-      { title: "Mensajes" },
-      { title: "Premium" },
+      { title: "Inicio", href:`/my-announcements/${sessionStorage.getItem("id")}`},
+      { title: "Perfil",href: `/profile-company/${sessionStorage.getItem("id")}` },
+      { title: "Notificaciones", href: `/company/${sessionStorage.getItem("id")}/my-notifications`},
+      { title: "Buscar postulantes",href: `/company/${sessionStorage.getItem("id")}/search-profile-postulant` },
     ];
     this.items= items2;
     //this.testvar=linkxd

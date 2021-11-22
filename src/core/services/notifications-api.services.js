@@ -1,23 +1,24 @@
-import http from "./http-common"
-class NotificationsApiServices {
+//import http from "./http-common"
+//import https from "./http-commonBackend"
+import httpaxios from "./http-commonToken";
+export default class NotificationsApiServices {
+    https=null
+    constructor(token) {
+        this.https=httpaxios(token)
+    }
     getAll(){
-        return http.get("/Notifications");
+        return this.https.get("/notificationsPostulant");
     }
     get_by_postulant(id){
-        return http.get(`/Notifications?id_postulant=${id}`);
+        return this.https.get(`/notificationsPostulant/postulantId=${id}`);
     }
     get_company_notification(id){
-        return http.get(`/Notifications?id_company=${id}`);
+        return this.https.get(`/notificationsPostulant/companyId=${id}`);
     }
     get_announcement_notification(id){
-        return http.get(`/Notifications?id_announcement=${id}`);
+        return this.https.get(`/notificationsPostulant/announcementId=${id}`);
     }
-    get_notifications_postulant(){
-        return http.get("/Notifications?type=declined&type=accepted");
-    }
-   
     add_notification(data){
-        return http.post(`/Notifications`,data)
+        return this.https.post(`/notificationsPostulant`,data)
     }
 }
-export default new NotificationsApiServices();
